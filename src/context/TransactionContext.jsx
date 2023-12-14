@@ -20,7 +20,7 @@ export const TransactionsProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("");
     const [formData, setFormData] = useState({ addressTo: "", amount: "", keyword: "", message: "" })
     const [isLoading, setIsLoading] = useState(false)
-const [transactionCount,setTransactionCount]=useState(localStorage.getItem('transactionCount'))
+    const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactionCount'))
 
 
 
@@ -93,7 +93,7 @@ const [transactionCount,setTransactionCount]=useState(localStorage.getItem('tran
             setIsLoading(false);
             console.log(`Success - ${transactionHash.hash}`);
             const transactionCount = await transactionsContract.getTransactionCount();
-            setTransactionCount(transactionCount.toNumber)
+            setTransactionCount(transactionCount.toNumber())
 
 
         } catch (error) {

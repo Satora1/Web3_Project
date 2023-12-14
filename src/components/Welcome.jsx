@@ -4,6 +4,7 @@ import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import { Loader } from "./";
 import { TransactionContext } from "../context/TransactionContext.jsx";
+import { shortenAddress } from "../utils/shortenAddress.js";
 const CommonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
 
@@ -35,7 +36,7 @@ const Welcome = () => {
       };
     return (
         <div className="flex w-full justify-center items-center">
-            <div className="flex mf:flex-row flex-row items-start justify-between md:p-20 py-12 px-4">
+            <div className="flex mf:flex-row flex-col flex-row items-start justify-between md:p-20 py-12 px-4">
                 <div className="flex flex-1 justify-start flex-col mf:mr-10">
                     <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
                         Send Crypto <br />across the world
@@ -63,10 +64,10 @@ const Welcome = () => {
                         <div className={CommonStyles}>
                             Security
                         </div>
-                        <div className={`rounded-tr-2xl ${CommonStyles}`}>
+                        <div className={`sm:rounded-tr-2xl ${CommonStyles}`}>
                             Ethereum
                         </div>
-                        <div className={`rounded-bl-2xl ${CommonStyles}`}>
+                        <div className={`sm:rounded-bl-2xl ${CommonStyles}`}>
                             Web 3.0
                         </div>
                         <div className={CommonStyles}>
@@ -88,7 +89,7 @@ const Welcome = () => {
                             </div>
                             <div>
                                 <p className="text-white font-light text-sm">
-                                    Adress
+                                    {shortenAddress(currentAccount)}
                                 </p>
                                 <p className="text-white font-semibold text-lg mt-1">
                                     ETH
@@ -96,8 +97,7 @@ const Welcome = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
-                        <Input placeholder="Adress To" name="addressTo" type="text" handleChange={handleChange} />
+                    <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">                        <Input placeholder="Adress To" name="addressTo" type="text" handleChange={handleChange} />
                         <Input placeholder="Amount (ETH)" name="amount" type="number" handleChange={handleChange} />
                         <Input placeholder="Keyword (Gif)" name="keyword" type="text" handleChange={handleChange} />
                         <Input placeholder="Enter message" name="message" type="text" handleChange={handleChange} />
