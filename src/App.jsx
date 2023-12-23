@@ -1,4 +1,4 @@
-import { Navbar,Welcome,Services,Transactions,Loader,Footer } from './components'
+import { Navbar,Welcome,Services,Transactions,Loader,Footer, Market } from './components'
 
 
 const App = () => {
@@ -7,10 +7,11 @@ const App = () => {
 <div className='gradient-bg-welcome'>
   <Navbar/>
   <Welcome/>
-
+<Market/>
 </div>
 <Services/>
 <Transactions/>
+
 <Footer/>
    </div>
 
