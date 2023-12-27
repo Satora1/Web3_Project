@@ -14,38 +14,14 @@ const Market = () => {
     const [amount, setAmount] = useState('');
     const [price, setPrice] = useState('');
 
-    const InputC = ({ placeholder, name, type, value, handleChange }) => {
+    const InputP = ({ placeholder, name, type, value ,className}) => {
         return (
             <input
                 placeholder={placeholder}
                 name={name}
                 type={type}
-                step="0.0001"
                 value={value}
-                onChange={(e) => handleChange(e)}
-            />
-        );
-    }
-
-    const InputP = ({ placeholder, name, type, value }) => {
-        const calculatePrice = () => {
-            if (cryptoType === 'ETH') {
-                return ethPrice * amount;
-            } else if (cryptoType === 'BTC') {
-                return btcPrice * amount;
-            } else if (cryptoType === 'BNB') {
-                return bnbPrice * amount;
-            } else {
-                return '';
-            }
-        };
-
-        return (
-            <input
-                placeholder={placeholder}
-                name={name}
-                type={type}
-                value={calculatePrice()}
+                className={className}
                 readOnly
             />
         );
@@ -90,57 +66,57 @@ const Market = () => {
         fetchDataFromBNB();
     }, []);
 
-    const handleAmountChange = (event) => {
-        const newAmount = event.target.value;
-        setAmount(newAmount);
-
-        // Calculate and update price
-        const calculatedPrice = cryptoType === 'ETH' ? ethPrice * newAmount :
-            cryptoType === 'BTC' ? btcPrice * newAmount :
-            cryptoType === 'BNB' ? bnbPrice * newAmount :
-            '';
-        setPrice(calculatedPrice);
+    const handleAmountChange = () => {
+        const newAmount = parseFloat(amount.trim());
+        if (!isNaN(newAmount)) {
+            const calculatedPrice = cryptoType === 'ETH' ? ethPrice * newAmount :
+                cryptoType === 'BTC' ? btcPrice * newAmount :
+                cryptoType === 'BNB' ? bnbPrice * newAmount :
+                '';
+            setPrice(calculatedPrice);
+        }
     };
 
     const handleCryptoChange = (event) => {
         setCryptoType(event.target.value);
-
-        // Reset input values on crypto change
         setAmount('');
         setPrice('');
     };
 
     return (
         <div className="flex items-center text-center justify-center w-full">
-        <div className="flex flex-col justify-between p-4 md:p-20 py-12">
-        <div className="flex flex-col items-center p-4 md:p-20 py-12">        
-            <h1 className="text-4xl sm:text-5xl text-white py-2 font-semibold">
-                Market
-            </h1>
-            <div className='items-center justify-center'>
-    <h1 className='text-white text-center'>Select crypto and calculate value of coins</h1>
-    <select id="mySelect" onChange={handleCryptoChange} value={cryptoType} className="my-2">
-        <option value="ETH">ETH</option>
-        <option value="BTC">BTC</option>
-        <option value="BNB">BNB</option>
-    </select>
-    <InputC
-        placeholder="Amount"
-        name="amount"
-        type="number"
-        value={amount}
-        handleChange={handleAmountChange}
-        className="my-2"
-    />
-    <InputP
-        placeholder="Price"
-        name="price"
-        type="number"
-        value={price}
-        className="my-2"
-    />
+            <div className="flex flex-col justify-between p-4 md:p-20 py-12">
+                <div className="flex flex-col items-center p-4 md:p-20 py-12">
+                    <h1 className="text-4xl sm:text-5xl text-white py-2 font-semibold">
+                        Market
+                    </h1>
+                    <div className='items-center justify-center'>
+                        <h1 className='text-white text-center '>Select crypto and calculate value of coins</h1>
+                        <select id="mySelect" onChange={handleCryptoChange} value={cryptoType} className="my-2 rounded">
+                            <option value="ETH">ETH</option>
+                            <option value="BTC">BTC</option>
+                            <option value="BNB">BNB</option>
+                        </select>
+                        <input
+                            placeholder="Amount"
+                            name="amount"
+                            type="number"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            className="my-2 rounded "
+                        />
+                        <InputP 
+                        
+                            placeholder="Price $"
+                            name="price"
+                            type="text"
+                            value={price}
+                            className="my-2  rounded"
+                        />
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAmountChange}>
+                            Calculate
+                        </button>
 </div>
-
                 </div>
                 <div className="flex flex-col md:flex-row  justify-start items-center mt-4">
 
