@@ -84,7 +84,7 @@ const Market = () => {
     };
 
     return (
-        <div className="flex items-center text-center justify-center w-full">
+        <div id='Market' className="flex items-center text-center justify-center w-full">
             <div className="flex flex-col justify-between p-4 md:p-20 py-12">
                 <div className="flex flex-col items-center p-4 md:p-20 py-12">
                     <h1 className="text-4xl sm:text-5xl text-white py-2 font-semibold">
@@ -110,7 +110,7 @@ const Market = () => {
                             placeholder="Price $"
                             name="price"
                             type="text"
-                            value={price}
+                            value={price+" $"}
                             className="my-2  rounded"
                         />
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAmountChange}>
