@@ -28,6 +28,10 @@ body {
     radial-gradient(at 50% 100%, hsla(225,39%,25%,1) 0, transparent 50%);
 }
 
+.color-blue{
+  background-color: blue;
+}
+
 .gradient-bg-transactions {
   background-color: #0f0e13;
   background-image: 
@@ -50,6 +54,17 @@ body {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
+
+.extra-light-blue-glassmorphism {
+  background: rgba(80, 101, 167, 0.1); /* Jeszcze jaśniejszy kolor tła */
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(54, 50, 50, 0.05); /* Bardziej subtelny cień */
+  backdrop-filter: blur(2px); /* Mniejsze rozmycie tła */
+  -webkit-backdrop-filter: blur(2px); /* Mniejsze rozmycie tła dla przeglądarek WebKit */
+  border: 1px solid rgba(49, 44, 44, 0.05); /* Bardziej subtelny kolor obramowania */
+}
+
+
 
 /* white glassmorphism */
 .white-glassmorphism {
