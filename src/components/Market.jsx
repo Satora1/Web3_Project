@@ -5,16 +5,19 @@ import fetchDataBtc from '../hoks/fetchDataBtc';
 import fetchDataBnb from '../hoks/fetchDataBnb';
 import btc from "../../images/BTC.png";
 import bnb from "../../images/BNB.png";
+import Gfal from "../../images/GFAL.png"
+import fetchDataGfal from '../hoks/fetchDataGfal';
 
 const Market = () => {
     const [ethPrice, setEthPrice] = useState(null);
     const [btcPrice, setBtcPrice] = useState(null);
     const [bnbPrice, setBnbPrice] = useState(null);
+    const [gfalPrice, setGfalPrice] = useState(null);
     const [cryptoType, setCryptoType] = useState('ETH');
     const [amount, setAmount] = useState('');
     const [price, setPrice] = useState('');
 
-    const InputP = ({ placeholder, name, type, value ,className}) => {
+    const InputP = ({ placeholder, name, type, value, className }) => {
         return (
             <input
                 placeholder={placeholder}
@@ -66,13 +69,29 @@ const Market = () => {
         fetchDataFromBNB();
     }, []);
 
+    useEffect(() => {
+        const fetchDataFromGfal = async () => {
+            try {
+                const responseGFAL = await fetchDataGfal();
+                setGfalPrice(responseGFAL?.market_data?.current_price?.usd);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchDataFromGfal();
+    }, []);
+
+
     const handleAmountChange = () => {
         const newAmount = parseFloat(amount.trim());
         if (!isNaN(newAmount)) {
-            const calculatedPrice = cryptoType === 'ETH' ? ethPrice * newAmount :
-                cryptoType === 'BTC' ? btcPrice * newAmount :
-                cryptoType === 'BNB' ? bnbPrice * newAmount :
-                '';
+            const calculatedPrice =
+                cryptoType === 'ETH' ? ethPrice * newAmount :
+                    cryptoType === 'BTC' ? btcPrice * newAmount :
+                        cryptoType === 'BNB' ? bnbPrice * newAmount :
+                            cryptoType === 'GFAL' ? gfalPrice * newAmount :
+                                '';
             setPrice(calculatedPrice);
         }
     };
@@ -96,6 +115,7 @@ const Market = () => {
                             <option value="ETH">ETH</option>
                             <option value="BTC">BTC</option>
                             <option value="BNB">BNB</option>
+                            <option value="GFAL">GFAL</option>
                         </select>
                         <input
                             placeholder="Amount"
@@ -105,18 +125,18 @@ const Market = () => {
                             onChange={(e) => setAmount(e.target.value)}
                             className="my-2 rounded "
                         />
-                        <InputP 
-                        
+                        <InputP
+
                             placeholder="Price $"
                             name="price"
                             type="text"
-                            value={price+" $"}
+                            value={price + " $"}
                             className="my-2  rounded"
                         />
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAmountChange}>
                             Calculate
                         </button>
-</div>
+                    </div>
                 </div>
                 <div className="flex flex-col md:flex-row  justify-start items-center mt-4">
 
@@ -153,6 +173,17 @@ const Market = () => {
                         </div>
                         <div className="ml-5 flex flex-col flex-1">
                             <h1 className="mt-2 text-white text-lg">{bnbPrice ? `$${bnbPrice}` : 'Loading...'}</h1>
+                        </div>
+                    </div>
+                    <div
+                        className="flex flex-row justify-start items-center white-glassmorphism p-3 m-2 cursor-pointer hover:shadow-xl"
+                        onClick={() => window.open('https://www.coingecko.com/en/coins/games-for-a-living', '_blank')}
+                    >
+                        <div className="w-40 h-40 rounded-full flex justify-center items-center overflow-hidden">
+                            <img src={Gfal} alt="BNB icon" className="w-40 h-40 object-cover" />
+                        </div>
+                        <div className="ml-5 flex flex-col flex-1">
+                            <h1 className="mt-2 text-white text-lg">{gfalPrice ? `$${gfalPrice}` : 'Loading...'}</h1>
                         </div>
                     </div>
                 </div>
