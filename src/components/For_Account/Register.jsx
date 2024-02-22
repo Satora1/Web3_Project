@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import validation from './SignupValidation';
+import SignupValidation from './SignupValidation';
 import axios from 'axios';
 
 const Register = ({ handleOpenPopup }) => {
@@ -17,13 +17,13 @@ const Register = ({ handleOpenPopup }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const validationErrors = validation(values);
+        const validationErrors = SignupValidation(values);
         setErrors(validationErrors);
 
         if (Object.values(validationErrors).every(value => value === '')) {
             try {
-                const response = await axios.post('http://localhost:8081/signup', values);
-                console.log('registered');
+                const response = await axios.post('https://kryptosatora.store', values);
+                console.log('registered', response.data);
             } catch (error) {
                 console.error('registration error', error);
             }
