@@ -111,31 +111,47 @@ const Market = () => {
                     </h1>
                     <div className='items-center justify-center'>
                         <h1 className='text-white text-center '>Select crypto and calculate value of coins</h1>
-                        <select id="mySelect" onChange={handleCryptoChange} value={cryptoType} className="my-2 rounded">
-                            <option value="ETH">ETH</option>
-                            <option value="BTC">BTC</option>
-                            <option value="BNB">BNB</option>
-                            <option value="GFAL">GFAL</option>
-                        </select>
-                        <input
-                            placeholder="Amount"
-                            name="amount"
-                            type="number"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            className="my-2 rounded "
-                        />
-                        <InputP
+                        <div className="flex flex-col gap-4 p-6 white-glassmorphism rounded-lg shadow-md  w-350">
+                            <div className="flex gap-4 items-center">
+                                <select
+                                    id="mySelect"
+                                    onChange={handleCryptoChange}
+                                    value={cryptoType}
+                                    className="w-32 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    <option value="ETH">ETH</option>
+                                    <option value="BTC">BTC</option>
+                                    <option value="BNB">BNB</option>
+                                    <option value="GFAL">GFAL</option>
+                                </select>
 
-                            placeholder="Price $"
-                            name="price"
-                            type="text"
-                            value={price + " $"}
-                            className="my-2  rounded"
-                        />
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAmountChange}>
-                            Calculate
-                        </button>
+                                <input
+                                    placeholder="Amount"
+                                    name="amount"
+                                    type="number"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    className="w-32 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+
+                                <input
+                                    placeholder="Price $"
+                                    name="price"
+                                    type="text"
+                                    value={price + " $"}
+                                    className="w-32 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    disabled
+                                />
+                            </div>
+
+                            <button
+                                className="w-full py-3 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                onClick={handleAmountChange}
+                            >
+                                Calculate
+                            </button>
+                        </div>
+
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row  justify-start items-center mt-4">
@@ -183,7 +199,9 @@ const Market = () => {
                             <img src={Gfal} alt="BNB icon" className="w-40 h-40 object-cover" />
                         </div>
                         <div className="ml-5 flex flex-col flex-1">
-                            <h1 className="mt-2 text-white text-lg">{gfalPrice ? `$${gfalPrice}` : 'Loading...'}</h1>
+                            <h1 className="mt-2 text-white text-lg">
+                                {gfalPrice ? `$${Number(gfalPrice).toFixed(4)}` : 'Loading...'}
+                            </h1>
                         </div>
                     </div>
                 </div>
